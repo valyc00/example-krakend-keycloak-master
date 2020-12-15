@@ -90,7 +90,8 @@ curl -H "Authorization: Bearer $TOKEN" http://localhost:8402/mock/parents/1 -i
 
 ### role mapping tricks
 1. fare in modo che i ruoli nel jwt non siano in realm_access.roles ma direttamente in roles(krakend non gestisce i dati annidati nel JWT) (https://discuss.istio.io/t/nested-jwt-claims-validation/3583/3)
-nel clients-->client id--> mapper creare un mappper: 
+nel clients-->client id--> mapper creare un mapper: 
+
 -name:role-mapper  
 -Mapper Type "User Realm Role"  
 -Token Claim Name: roles  
