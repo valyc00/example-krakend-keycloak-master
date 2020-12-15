@@ -9,7 +9,7 @@ volumes:
 
 services:
   krakend:
-    image: devopsfaith/krakend:latest
+    image: devopsfaith/krakend:1.2
     container_name: krakend
     command: run -d -c /etc/krakend/krakend.json
     ports:
@@ -24,7 +24,7 @@ services:
       - "8401:80"
 
   keycloak-db:
-    image: postgres:latest
+    image: postgres:13.1
     container_name: keycloak-db
     user: root  # needed because windows hates me
     volumes:
@@ -39,7 +39,7 @@ services:
       POSTGRES_PASSWORD: password
 
   keycloak:
-    image: jboss/keycloak:latest
+    image: jboss/keycloak:11.0.3
     container_name: keycloak
     depends_on:
       - keycloak-db
