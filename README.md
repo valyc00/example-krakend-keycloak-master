@@ -86,3 +86,29 @@ curl -H "Authorization: Bearer $TOKEN" http://localhost:8402/mock/parents/1 -i
     ]
 }
 ```
+
+
+### role mapping tricks
+1. fare in modo che i ruoli nel jwt non siano in realm_access.roles ma direttamente in roles (https://discuss.istio.io/t/nested-jwt-claims-validation/3583/3)
+nel clients-->client id--> mapper creare un mappper: 
+-name:role-mapper  
+-Mapper Type "User Realm Role"  
+-Token Claim Name: roles  
+-Claim JSON Type:String  
+-Add to ID token:off 
+-Add to access token:on 
+-Add to userinfo:off
+2. aggiungere nell'extra_config roles_key(roles) e in roles i ruoli che devono esistere affinche avvenga il routing:
+```json
+ "extra_config": {
+                "github.com/devopsfaith/krakend-jose/validator": {
+                    "alg": "RS256",
+					 "roles_key": "roles",
+                     "roles": ["myrole"],
+					"jwk-url": "http://192.168.0.8:8403/auth/realms/master/protocol/openid-connect/certs",
+                    "issuer": "http://localhost:8403/auth/realms/master",
+                    "disable_jwk_security": true
+                }
+				
+            },
+```			
