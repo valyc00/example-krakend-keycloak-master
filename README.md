@@ -34,7 +34,7 @@ curl -H "Authorization: Bearer $TOKEN" http://localhost:8402/mock/parents/1 -i
 ```
 
 ### config
-
+```json
 {
     "version": 2,
     "extra_config": {
@@ -85,3 +85,4 @@ curl -H "Authorization: Bearer $TOKEN" http://localhost:8402/mock/parents/1 -i
         }
     ]
 }
+```
